@@ -1,6 +1,6 @@
 import frameworkNe from './frameworkNe.js';
 
-const { CustomStore, executeAction, createNode, render } = frameworkNe;
+const { CustomStore, createNode, render } = frameworkNe;
 
 // --- Initial State ---
 CustomStore.updateState({ tasks: [] });
@@ -70,8 +70,8 @@ CustomStore.addSubscriber(() => {
   }
 });
 
-// --- Configure action execution ---
-frameworkNe.executeAction = (action) => {
+// Action dispatcher function
+const executeAction = (action) => {
   const { tasks } = CustomStore.getCurrentState();
   switch (action.type) {
     case "ADD_TASK":
@@ -84,6 +84,8 @@ frameworkNe.executeAction = (action) => {
       console.warn("Unknown action:", action);
   }
 };
+
+
 
 // --- Initialize the application ---
 const appRoot = document.getElementById("appRoot");

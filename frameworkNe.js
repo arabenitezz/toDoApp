@@ -63,25 +63,9 @@ const CustomRenderer = {
   }
 };
 
-// Action dispatcher function
-const executeAction = (action) => {
-  const { tasks } = CustomStore.getCurrentState();
-  switch (action.type) {
-    case "ADD_TASK":
-      CustomStore.updateState({ tasks: [...tasks, action.payload] });
-      break;
-    case "REMOVE_TASK":
-      CustomStore.updateState({ tasks: tasks.filter((_, idx) => idx !== action.payload) });
-      break;
-    default:
-      console.warn("Unknown action:", action);
-  }
-};
-
 // Export the framework as a single object
 const frameworkNe = {
   CustomStore,
-  executeAction, // Export the executeAction function
   createNode: CustomRenderer.createNode.bind(CustomRenderer),
   render: CustomRenderer.render.bind(CustomRenderer)
 };
